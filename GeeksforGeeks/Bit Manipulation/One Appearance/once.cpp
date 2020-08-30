@@ -4,20 +4,20 @@ using namespace std;
 
 int getSingle(int a[], int n)  
 {  
-    int ones=0, twos=0;  
-  
-    int common_bit_mask;  
-  
-    for( int i=0; i< n; i++ ) {
-        twos = twos | (ones & a[i]);
-        ones = ones ^ a[i];  
-        common_bit_mask = ~(ones & twos);  
-        ones &= common_bit_mask;  
-        twos &= common_bit_mask;  
-
-    }  
-  
-    return ones;  
+    int result=0,x,sum;
+    for(int i=0;i<32;i++){
+        sum=0;
+        x=1<<i;
+        for(int j=0;j<n;j++){
+            if(a[j]&x){
+                sum++;
+            }
+        }
+        if(sum%3!=0){
+            result|=x;
+        }
+    }
+    return result;
 }
 
 int main() {
